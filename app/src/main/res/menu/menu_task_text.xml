@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_task_text_save"
+        android:title="@string/save"
+        android:icon="@drawable/ic_save_black_24dp"
+        yourapp:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_task_text_share"
+        android:title="@string/share"
+        android:icon="@drawable/ic_share_black_24dp"
+        yourapp:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_task_text_translate"
+        android:title="@string/text_translate"
+        android:icon="@drawable/ic_translate_black_24dp"
+        yourapp:showAsAction="ifRoom" />
+</menu>

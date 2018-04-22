@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".TextActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="false">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <EditText
+            android:id="@+id/taskTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            android:gravity="top"
+            android:maxLines="1"
+            android:hint="@string/task_title_hint"
+            android:textColorHint="@color/black"/>
+
+        <EditText
+            android:id="@+id/taskText"
+            android:textColorHint="@color/black"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="top"
+            android:hint="@string/task_content_hint"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

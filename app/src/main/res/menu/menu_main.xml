@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:title="@android:string/search_go"
+        android:icon="@drawable/ic_search_black_24dp"
+        yourapp:showAsAction="ifRoom|collapseActionView"
+        yourapp:actionViewClass="android.support.v7.widget.SearchView" />
+    <item
+        android:id="@+id/action_split"
+        android:title="@string/split"
+        android:icon="@drawable/ic_view_stream_black_24dp"
+        yourapp:showAsAction="ifRoom" />
+</menu>
