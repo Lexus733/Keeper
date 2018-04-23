@@ -152,7 +152,7 @@ public class GeneralActivity extends AppCompatActivity {
                 try {
 
                     Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-
+                    // чего-то тут не хватает
                 }
                 catch (NullPointerException ex){
                     Toast.makeText(this, "Photo don't created", Toast.LENGTH_SHORT).show();
@@ -165,8 +165,7 @@ public class GeneralActivity extends AppCompatActivity {
                     imageUri = data.getData();
                     imageStream = getContentResolver().openInputStream(imageUri);
                     Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-
-
+                    // чего-то тут не хватает
                 }
                 catch (FileNotFoundException e) {
                     Toast.makeText(this, "Picture don't took",
@@ -196,7 +195,7 @@ public class GeneralActivity extends AppCompatActivity {
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
-            int type = cursor.getInt(2);
+            int type = cursor.getInt(2); //Зачем, если не используем
             String content = cursor.getString(3);
 
             ListItems taskListItem = new Text(id, name, content);
@@ -225,7 +224,10 @@ public class GeneralActivity extends AppCompatActivity {
             Toast.makeText(this, "Added error!", Toast.LENGTH_SHORT).show();
         }
 
-        dataBaseAdapter.close();
+        dataBaseAdapter.close(); // Зачем вы каждый раз пересоздаете класс для доступа к БД?
+        // Этот объект нам нужен часто. Вы же при этом постоянно забиваете память новыми объектами
+        // данного класса и у вас чаще запускается GC, а это снижает производительнось.
+        // Сделайте его сингтоном и живите спокойно)
 
         retrieve();
 

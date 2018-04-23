@@ -23,9 +23,16 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int TYPE_ITEM_IMAGE = 1;
     private List<ListItems> items;
     private LayoutInflater inflater;
+
+    // Нижележащие переменные не нужны все можно оргпнизовать проще и без них.
+    // Не забывайте что у вас холдеры в списке сохранятся, но из пулла ресайклера они могут быть
+    // удалены системой.
+    // После запуска выяснилось, что при удалении записи из списка, запись не удаляется
     private RecyclerView.ViewHolder tempViewHolder;
     private List<RecyclerView.ViewHolder> viewHolderList;
-    private int tempViewHolderPosition;
+
+
+    private int tempViewHolderPosition; //m.b. selectedPosition
 
 
     public RecyclerItemAdapter(List<ListItems> items, Context context) {

@@ -1,7 +1,7 @@
 package com.example.admin.keeper;
 
 
-public class ListItems {
+public class ListItems { // m.b. ListItem
     public static final int TYPE_ITEM_TEXT = 0;
     public static final int TYPE_ITEM_IMAGE = 1;
     public static final int TYPE_ITEM_LIST = 2;
