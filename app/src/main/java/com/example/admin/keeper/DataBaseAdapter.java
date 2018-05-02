@@ -76,6 +76,11 @@ public class DataBaseAdapter {
                 null, null,null);
     }
 
+    public Cursor getAllTaskById(int id){
+        String[] columns = {TaskDatabaseHelper.COLUMN_ID,TaskDatabaseHelper.COLUMN_TITLE,TaskDatabaseHelper.COLUMN_TYPE,TaskDatabaseHelper.COLUMN_CONTENT};
+        return sqLiteDatabase.query(TaskDatabaseHelper.TABLE,columns,TaskDatabaseHelper.COLUMN_ID + "=" + id,null,null,null,null);
+    }
+
     public long UPdate(int id, String name, int type, String content)
     {
         try
@@ -111,5 +116,4 @@ public class DataBaseAdapter {
 
         return 0;
     }
-
 }

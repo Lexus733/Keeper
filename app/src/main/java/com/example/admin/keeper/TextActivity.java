@@ -16,10 +16,22 @@ public class TextActivity extends AppCompatActivity {
 
     EditText taskTitle;
     EditText taskText;
+    private Integer id;
     private String title;
     private String text;
     Toolbar mToolbar;
 
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String[] data = extras.getStringArray("data");
+            taskTitle.setText(data[0]);
+            taskText.setText(data[1]);
+            id = extras.getInt("id");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,9 @@ public class TextActivity extends AppCompatActivity {
         getText();
         data.putExtra(GeneralActivity.NAME, title);
         data.putExtra(GeneralActivity.TEXT, text);
+        if (id != null){
+            data.putExtra(GeneralActivity.ID, id);
+        }
         setResult(RESULT_OK, data);
     }
 

@@ -3,6 +3,7 @@ package com.example.admin.keeper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 tempViewHolder = new TextItemHolder(v);
                 viewHolderList.add(tempViewHolder);
                 v.setOnLongClickListener(new LongElementClickListener(tempViewHolder));
+                v.setOnClickListener(new ElementClickListener(tempViewHolder));
                 return tempViewHolder;
             case ListItems.TYPE_ITEM_IMAGE:
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.img_task_list_item,
@@ -110,7 +113,6 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     void removeItem(int position) {
         GeneralActivity activity = (GeneralActivity) inflater.getContext();
         activity.delete(position);
-
     }
 
 
@@ -121,7 +123,6 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public TextItemHolder(View itemView) {
             super(itemView);
-
             mName = itemView.findViewById(R.id.name);
             mText = itemView.findViewById(R.id.text);
         }
@@ -154,7 +155,7 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (activity.mActionMode == null) {
                 activity.mActionMode = activity.startSupportActionMode(activity.mActionModeCallback);
                 activity.mActionMode.setTitle("Action Mode");
-                tempViewHolderPosition = mViewHolder.getAdapterPosition();
+                tempViewHolderPosition =  mViewHolder.getAdapterPosition();
                 addSelection(mViewHolder);
             } else {
 
@@ -163,13 +164,11 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 removeSelection();
             }
             return true;
-
         }
-
-
     }
 
     public class ElementClickListener implements View.OnClickListener{
+
         RecyclerView.ViewHolder mViewHolder;
 
         public ElementClickListener(RecyclerView.ViewHolder viewHolder) {
@@ -178,11 +177,23 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View v) {
+        GeneralActivity activity = (GeneralActivity) inflater.getContext();
+        tempViewHolderPosition = tempViewHolder.getAdapterPosition();
+        switch (tempViewHolder.getItemViewType()){
+            case TYPE_ITEM_TEXT:{
+                Intent textIntent = new Intent(activity, TextActivity.class);
+                textIntent.putExtra("data", activity.getById(items.get(tempViewHolderPosition).getId()));
+                textIntent.putExtra("id",items.get(tempViewHolderPosition).getId());
+                activity.startActivityForResult(textIntent,GeneralActivity.TEXT_RESULT);
+                break;
+            }
+        }
 
         }
     }
 
     private void addSelection(RecyclerView.ViewHolder viewHolder) {
+
         viewHolder.itemView.setBackgroundResource(R.color.gray);
 
         items.get(tempViewHolderPosition).setSelected(true);
@@ -190,12 +201,11 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void removeSelection() {
 
-        for (ListItems item: items
-                ) {
+        for (ListItems item: items) {
             item.setSelected(false);
         }
-        for (RecyclerView.ViewHolder viewHolder: viewHolderList
-                ) {
+
+        for (RecyclerView.ViewHolder viewHolder: viewHolderList) {
             viewHolder.itemView.setBackgroundResource(R.color.gray);
         }
     }
@@ -218,7 +228,7 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             @Override
             public boolean onActionItemClicked(android.support.v7.view.ActionMode mode, MenuItem item) {
-                removeItem(tempViewHolderPosition);
+                removeItem(items.get(tempViewHolderPosition).getId());
                 activity.mActionMode.finish();
                 return false;
             }

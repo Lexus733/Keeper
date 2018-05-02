@@ -3,8 +3,8 @@
     <string name="title_add_task_text">Add Text</string>
     <string name="title_add_task_photo">Add a photo</string>
     <string name="title_add_task_list">Add to-do</string>
-    <string name="task_title_hint">Enter the title</string>
-    <string name="task_content_hint">Enter the text</string>
+    <string name="task_title_hint">Enter the title (En-Ru)</string>
+    <string name="task_content_hint">Enter the text (En-Ru)</string>
     <string name="split">Split</string>
     <string name="save_canceled">Save canceled</string>
     <string name="delete">Delete</string>
